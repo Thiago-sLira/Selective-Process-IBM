@@ -15,14 +15,14 @@ import java.util.List;
 public class SelectiveProcessController {
 
     @Autowired
-    private Segundo selectiveProcess;
+    private Segundo processoSeletivo;
 
     @PostMapping("/start")
     public ResponseEntity<Integer> iniciarProcesso(@RequestBody Candidato candidato) {
         String nome = candidato.getNome();
 
         try {
-            int codCandidato = this.selectiveProcess.iniciarProcesso(nome);
+            int codCandidato = this.processoSeletivo.iniciarProcesso(nome);
 
             return new ResponseEntity<>(codCandidato, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class SelectiveProcessController {
         int codCandidato = codCandidatoReq.getCodCandidato();
 
         try {
-            this.selectiveProcess.marcarEntrevista(codCandidato);
+            this.processoSeletivo.marcarEntrevista(codCandidato);
 
             return new ResponseEntity<>("Entrevista marcada para o candidato.", HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class SelectiveProcessController {
         int codCandidato = codCandidatoReq.getCodCandidato();
 
         try {
-            this.selectiveProcess.desqualificarCandidato(codCandidato);
+            this.processoSeletivo.desqualificarCandidato(codCandidato);
 
             return new ResponseEntity<>("Candidato desqualificado com sucesso.", HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class SelectiveProcessController {
         int codCandidato = codCandidatoReq.getCodCandidato();
 
         try {
-            this.selectiveProcess.aprovarCandidato(codCandidato);
+            this.processoSeletivo.aprovarCandidato(codCandidato);
 
             return new ResponseEntity<>("Candidato aprovado com sucesso.", HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class SelectiveProcessController {
     @GetMapping("/status/candidate/{id}")
     public ResponseEntity<String> verificarStatusCandidato(@PathVariable("id") int codCandidato) {
         try {
-            String candidatoStatus = this.selectiveProcess.verificarStatusCandidato(codCandidato);
+            String candidatoStatus = this.processoSeletivo.verificarStatusCandidato(codCandidato);
 
             return new ResponseEntity<>(candidatoStatus, HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class SelectiveProcessController {
 
     @GetMapping("/approved")    public ResponseEntity<?> obterAprovados() {
         try {
-            List<String> candidatoAprovados = this.selectiveProcess.obterAprovados();
+            List<String> candidatoAprovados = this.processoSeletivo.obterAprovados();
 
             return new ResponseEntity<>(candidatoAprovados, HttpStatus.ACCEPTED);
         } catch (Exception e) {
