@@ -17,6 +17,7 @@ public class SelectiveProcessController {
     @Autowired
     private Segundo processoSeletivo;
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/start")
     public ResponseEntity<Integer> iniciarProcesso(@RequestBody Candidato candidato) {
         String nome = candidato.getNome();
@@ -30,6 +31,7 @@ public class SelectiveProcessController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/schedule")
     public ResponseEntity<String> marcarEntrevista(@RequestBody CodCandidato codCandidatoReq) {
         int codCandidato = codCandidatoReq.getCodCandidato();
@@ -43,6 +45,7 @@ public class SelectiveProcessController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/disqualify")
     public ResponseEntity<String> desqualificarCandidato(@RequestBody CodCandidato codCandidatoReq) {
         int codCandidato = codCandidatoReq.getCodCandidato();
@@ -56,6 +59,7 @@ public class SelectiveProcessController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/approve")
     public ResponseEntity<String> aprovarCandidato(@RequestBody CodCandidato codCandidatoReq) {
         int codCandidato = codCandidatoReq.getCodCandidato();
@@ -69,6 +73,7 @@ public class SelectiveProcessController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/status/candidate/{id}")
     public ResponseEntity<String> verificarStatusCandidato(@PathVariable("id") int codCandidato) {
         try {
@@ -80,6 +85,7 @@ public class SelectiveProcessController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/approved")    public ResponseEntity<?> obterAprovados() {
         try {
             List<String> candidatoAprovados = this.processoSeletivo.obterAprovados();
